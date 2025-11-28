@@ -4,9 +4,14 @@ metadata:
   name: apps-scheduler
 spec:
   schedule: "*/2 * * * *"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 3600
       template:
+        metadata:
+            labels:
+              task: apps-scheduler
         spec:
           containers:
           - name: apps-scheduler-image
@@ -16,3 +21,10 @@ spec:
               - secretRef:
                   name: apps
           restartPolicy: Never
+          resources:
+            requests:
+              cpu: 200m
+              memory: "0.3Gi"
+            limits:
+              cpu: 400m
+              memory: "1Gi"
