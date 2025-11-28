@@ -10,9 +10,8 @@ spec:
         spec:
           containers:
           - name: apps-scheduler-image
-            image: busybox
-            args:
-              - /bin/sh
-              - -c
-              - date; echo "Hello from cronjob!"
+            image: ericgordon34/job-node:1.0.0
+            envFrom:
+              - secretRef:
+                  name: apps
           restartPolicy: Never
