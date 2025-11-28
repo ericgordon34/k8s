@@ -11,6 +11,7 @@ spec:
           containers:
           - name: apps-scheduler-image
             image: ericgordon34/job-node:1.0.0
+            imagePullPolicy: IfNotPresent
             envFrom:
               - secretRef:
                   name: apps
